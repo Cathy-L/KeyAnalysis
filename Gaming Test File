@@ -1,0 +1,115 @@
+# set working directory
+setwd("~/School/DIY/TIG/a9austin")
+# import .csv files into new dataframes
+a9austin1025post = read.csv("post102516.csv")
+a9austin1025pre = read.csv("pre102516.csv")
+
+setwd("~/School/DIY/TIG/g0arlington")
+g0arlington1025post = read.csv("post102516.csv")
+g0arlington1025pre = read.csv("pre102516.csv")
+
+setwd("~/School/DIY/TIG/h6sanantonio")
+h6sanantonio1026post = read.csv("post102616.csv")
+h6sanantonio1026pre = read.csv("pre102616.csv")
+
+setwd("~/School/DIY/TIG/o3linares")
+o3linares1025post = read.csv("post102516.csv")
+o3linares1025pre = read.csv("pre102516.csv")
+o3linares1027post = read.csv("post102716.csv")
+o3linares1027pre = read.csv("pre102716.csv")
+
+setwd("~/School/DIY/TIG/s2newbrunswick")
+s2newbrunswick1024post = read.csv("post102416.csv")
+s2newbrunswick1024pre = read.csv("pre102416.csv")
+s2newbrunswick1028post = read.csv("post102816.csv")
+s2newbrunswick1028pre = read.csv("pre102816.csv")
+
+setwd("~/School/DIY/TIG/g8chungli")
+g8chungli1101pre = read.csv("pre110116.csv")
+g8chungli1101post = read.csv("post110116.csv")
+
+
+#making a new vector with only the mean action times of "pre" files
+preMeansAT <- c(mean(a9austin1025pre$actionTime),
+                mean(g0arlington1025pre$actionTime),
+                mean(o3linares1027pre$actionTime),
+                mean(o3linares1025pre$actionTime),
+                mean(s2newbrunswick1024pre$actionTime),
+                mean(s2newbrunswick1028pre$actionTime),
+                mean(g8chungli1101pre$actionTime))
+
+#making a new vector with only the mean action times of "post" files
+postMeansAT <- c(mean(a9austin1025post$actionTime),
+                 mean(g0arlington1025post$actionTime),
+                 mean(o3linares1027post$actionTime),
+                 mean(o3linares1025post$actionTime),
+                 mean(s2newbrunswick1024post$actionTime),
+                 mean(s2newbrunswick1028post$actionTime),
+                 mean(g8chungli1101post$actionTime))
+
+#mean of mean action time values from each vector i just made
+mean(preMeansAT)
+mean(postMeansAT)
+
+#plotting boxplot
+boxplot(preMeansPT)
+boxplot(postMeansPT)
+
+#running a paired t-test to compare average pre and post-gaming action times 
+t.test(preMeansAT, postMeansAT, paired = TRUE)
+
+preMeansPT <- c(mean(a9austin1025pre$pauseTime),
+                mean(g0arlington1025pre$pauseTime),
+                mean(o3linares1027pre$pauseTime),
+                mean(o3linares1025pre$pauseTime),
+                mean(s2newbrunswick1024pre$pauseTime),
+                mean(s2newbrunswick1028pre$pauseTime),
+                mean(g8chungli1101pre$pauseTime))
+
+postMeansPT <- c(mean(a9austin1025post$pauseTime),
+                 mean(g0arlington1025post$pauseTime),
+                 mean(o3linares1027post$pauseTime),
+                 mean(o3linares1025post$pauseTime),
+                 mean(s2newbrunswick1024post$pauseTime),
+                 mean(s2newbrunswick1028post$pauseTime),
+                 mean(g8chungli1101post$pauseTime))
+
+t.test(preMeansPT, postMeansPT, paired = TRUE)
+
+mean(preMeansPT)
+mean(postMeansPT)
+
+plot(mean(a9austin1025pre$actionTime), mean(a9austin1025pre$pauseTime),
+     col = "red",
+     main = "Action/Pause Time Differences",
+     xlab = "Action Time (msec)",
+     ylab = "Pause Time (msec)",
+     xlim = c(90, 140),
+     ylim = c(150, 260))
+points(mean(a9austin1025post$actionTime), mean(a9austin1025post$pauseTime), col = "red", pch = 16)
+points(mean(g0arlington1025pre$actionTime), mean(g0arlington1025pre$pauseTime), col = "blue")
+points(mean(g0arlington1025post$actionTime), mean(g0arlington1025post$pauseTime), col = "blue", pch = 16)
+points(mean(o3linares1027pre$actionTime), mean(o3linares1027pre$pauseTime), col = "purple")
+points(mean(o3linares1027post$actionTime), mean(o3linares1027post$pauseTime), col = "purple", pch = 16)
+points(mean(o3linares1025pre$actionTime), mean(o3linares1025pre$pauseTime), col = "orchid")
+points(mean(o3linares1025post$actionTime), mean(o3linares1025post$pauseTime), col = "orchid", pch = 16)
+points(mean(s2newbrunswick1024pre$actionTime), mean(s2newbrunswick1024pre$pauseTime), col = "pink")
+points(mean(s2newbrunswick1024post$actionTime), mean(s2newbrunswick1024post$pauseTime), col = "pink", pch = 16)
+points(mean(s2newbrunswick1028pre$actionTime), mean(s2newbrunswick1028pre$pauseTime), col = "hotpink")
+points(mean(s2newbrunswick1028post$actionTime), mean(s2newbrunswick1028post$pauseTime), col = "hotpink", pch = 16)
+points(mean(g8chungli1101pre$actionTime), mean(g8chungli1101pre$pauseTime), col = "green")
+points(mean(g8chungli1101post$actionTime), mean(g8chungli1101post$pauseTime), col = "green", pch = 16)
+
+legend("topright",
+       c("a9austin", "g0arlington", "o3linares", "s2newbrunswick", "g8chungli"),
+       pch=16,
+       col=c("red", "blue", "purple", "hotpink", "green"))
+
+actiontime <- c(preMeansAT)
+actiontime <- append(actiontime, postMeansAT)
+pausetime <- c(preMeansPT)
+pausetime <- append(pausetime, postMeansPT)
+
+predots <- append(preMeansAT, preMeansPT)
+postdots <- append(postMeansAT, postMeansPT)
+
