@@ -1,0 +1,166 @@
+setwd("~/Dropbox/InputLog/TIG/a9austin")
+a9austin1025post = read.csv("post102516.csv")
+a9austin1025pre = read.csv("pre102516.csv")
+a9austin1104pre = read.csv("pre110416.csv")
+a9austin1104post = read.csv("post110416.csv")
+
+setwd("~/Dropbox/InputLog/TIG/g0arlington")
+g0arlington1025post = read.csv("post102516.csv")
+g0arlington1025pre = read.csv("pre102516.csv")
+g0arlington1026pre = read.csv("pre102616.csv")
+g0arlington1026post = read.csv("post102616.csv")
+
+setwd("~/Dropbox/InputLog/TIG/h6sanantonio")
+h6sanantonio1026post = read.csv("post102616.csv")
+h6sanantonio1026pre = read.csv("pre102616.csv")
+
+setwd("~/Dropbox/InputLog/TIG/o3linares")
+o3linares1025post = read.csv("post102516.csv")
+o3linares1025pre = read.csv("pre102516.csv")
+o3linares1027post = read.csv("post102716.csv")
+o3linares1027pre = read.csv("pre102716.csv")
+
+setwd("~/Dropbox/InputLog/TIG/s2newbrunswick")
+s2newbrunswick1024post = read.csv("post102416.csv")
+s2newbrunswick1024pre = read.csv("pre102416.csv")
+s2newbrunswick1028post = read.csv("post102816.csv")
+s2newbrunswick1028pre = read.csv("pre102816.csv")
+
+setwd("~/Dropbox/InputLog/TIG/g8chungli")
+g8chungli1101pre = read.csv("pre110116.csv")
+g8chungli1101post = read.csv("post110116.csv")
+
+setwd("~/Dropbox/InputLog/TIG/r6fairfax")
+r6fairfax1117pre = read.csv("pre111716.csv")
+r6fairfax1117post = read.csv("post111716.csv")
+
+setwd("~/Dropbox/InputLog/TIG/i7alamogordo")
+i7alamogordo1116pre = read.csv("pre111616.csv")
+i7alamogordo1116post = read.csv("post111616.csv")
+i7alamogordo1117pre = read.csv("pre111716.csv")
+i7alamogordo1117post = read.csv("post111716.csv")
+
+
+preMeansAT <- c(mean(a9austin1025pre$actionTime),
+                mean(g0arlington1025pre$actionTime),
+                mean(o3linares1027pre$actionTime),
+                mean(o3linares1025pre$actionTime),
+                mean(s2newbrunswick1024pre$actionTime),
+                mean(s2newbrunswick1028pre$actionTime),
+                mean(g8chungli1101pre$actionTime),
+                mean(a9austin1104pre$actionTime),
+                mean(g0arlington1026pre$actionTime),
+                mean(r6fairfax1117pre$actionTime),
+                mean(i7alamogordo1116pre$actionTime),
+                mean(i7alamogordo1117pre$actionTime)
+                )
+
+postMeansAT <- c(mean(a9austin1025post$actionTime),
+                 mean(g0arlington1025post$actionTime),
+                 mean(o3linares1027post$actionTime),
+                 mean(o3linares1025post$actionTime),
+                 mean(s2newbrunswick1024post$actionTime),
+                 mean(s2newbrunswick1028post$actionTime),
+                 mean(g8chungli1101post$actionTime),
+                 mean(a9austin1104post$actionTime),
+                 mean(g0arlington1026post$actionTime),
+                 mean(r6fairfax1117post$actionTime),
+                 mean(i7alamogordo1116post$actionTime),
+                 mean(i7alamogordo1117post$actionTime)
+                 )
+
+mean(preMeansAT)
+mean(postMeansAT)
+
+boxplot(preMeansPT)
+boxplot(postMeansPT)
+
+t.test(preMeansAT, postMeansAT, paired = TRUE)
+
+preMeansPT <- c(mean(a9austin1025pre$pauseTime),
+                mean(g0arlington1025pre$pauseTime),
+                mean(o3linares1027pre$pauseTime),
+                mean(o3linares1025pre$pauseTime),
+                mean(s2newbrunswick1024pre$pauseTime),
+                mean(s2newbrunswick1028pre$pauseTime),
+                mean(g8chungli1101pre$pauseTime),
+                mean(a9austin1104pre$pauseTime),
+                mean(g0arlington1026pre$pauseTime),
+                mean(r6fairfax1117pre$pauseTime),
+                mean(i7alamogordo1116pre$pauseTime),
+                mean(i7alamogordo1117pre$pauseTime)
+                )
+
+postMeansPT <- c(mean(a9austin1025post$pauseTime),
+                 mean(g0arlington1025post$pauseTime),
+                 mean(o3linares1027post$pauseTime),
+                 mean(o3linares1025post$pauseTime),
+                 mean(s2newbrunswick1024post$pauseTime),
+                 mean(s2newbrunswick1028post$pauseTime),
+                 mean(g8chungli1101post$pauseTime),
+                 mean(a9austin1104post$pauseTime),
+                 mean(g0arlington1026post$pauseTime),
+                 mean(r6fairfax1117post$pauseTime),
+                 mean(i7alamogordo1116post$pauseTime),
+                 mean(i7alamogordo1117post$pauseTime)
+                 )
+
+t.test(preMeansPT, postMeansPT, paired = TRUE)
+
+mean(preMeansPT)
+mean(postMeansPT)
+
+plot(mean(a9austin1025pre$actionTime), mean(a9austin1025pre$pauseTime),
+     col = "red",
+     main = "Action/Pause Time Differences",
+     xlab = "Action Time (msec)",
+     ylab = "Pause Time (msec)",
+     xlim = c(90, 140),
+     ylim = c(150, 260))
+points(mean(a9austin1025post$actionTime), mean(a9austin1025post$pauseTime), col = "red", pch = 16)
+points(mean(g0arlington1025pre$actionTime), mean(g0arlington1025pre$pauseTime), col = "blue")
+points(mean(g0arlington1025post$actionTime), mean(g0arlington1025post$pauseTime), col = "blue", pch = 16)
+points(mean(o3linares1027pre$actionTime), mean(o3linares1027pre$pauseTime), col = "purple")
+points(mean(o3linares1027post$actionTime), mean(o3linares1027post$pauseTime), col = "purple", pch = 16)
+points(mean(o3linares1025pre$actionTime), mean(o3linares1025pre$pauseTime), col = "orchid")
+points(mean(o3linares1025post$actionTime), mean(o3linares1025post$pauseTime), col = "orchid", pch = 16)
+points(mean(s2newbrunswick1024pre$actionTime), mean(s2newbrunswick1024pre$pauseTime), col = "pink")
+points(mean(s2newbrunswick1024post$actionTime), mean(s2newbrunswick1024post$pauseTime), col = "pink", pch = 16)
+points(mean(s2newbrunswick1028pre$actionTime), mean(s2newbrunswick1028pre$pauseTime), col = "hotpink")
+points(mean(s2newbrunswick1028post$actionTime), mean(s2newbrunswick1028post$pauseTime), col = "hotpink", pch = 16)
+points(mean(g8chungli1101pre$actionTime), mean(g8chungli1101pre$pauseTime), col = "green")
+points(mean(g8chungli1101post$actionTime), mean(g8chungli1101post$pauseTime), col = "green", pch = 16)
+
+points(mean(a9austin1104pre$actionTime), mean(a9austin1104pre$pauseTime), col = "firebrick")
+points(mean(a9austin1104post$actionTime), mean(a9austin1104post$pauseTime), col = "firebrick", pch = 16)
+
+points(mean(g0arlington1026pre$actionTime), mean(g0arlington1026pre$pauseTime), col = "dodgerblue")
+points(mean(g0arlington1026post$actionTime), mean(g0arlington1026post$pauseTime), col = "dodgerblue", pch = 16)
+
+points(mean(r6fairfax1117pre$actionTime), mean(r6fairfax1117pre$pauseTime), col = "orange")
+points(mean(r6fairfax1117post$actionTime), mean(r6fairfax1117post$pauseTime), col = "orange", pch = 16)
+
+points(mean(i7alamogordo1116pre$actionTime), mean(i7alamogordo1116pre$pauseTime), col = "gray52")
+points(mean(i7alamogordo1116post$actionTime), mean(i7alamogordo1116post$pauseTime), col = "gray52", pch = 16)
+
+points(mean(i7alamogordo1117pre$actionTime), mean(i7alamogordo1117pre$pauseTime), col = "gray28")
+points(mean(i7alamogordo1117post$actionTime), mean(i7alamogordo1117post$pauseTime), col = "gray28", pch = 16)
+
+legend("topleft",
+       c("a9austin", "g0arlington", "o3linares", "s2newbrunswick", "g8chungli", "r6fairfax", "i7alamogordo"),
+       pch=16,
+       col=c("red", "blue", "purple", "hotpink", "green", "orange", "gray52"))
+
+actiontime <- c(preMeansAT)
+actiontime <- append(actiontime, postMeansAT)
+pausetime <- c(preMeansPT)
+pausetime <- append(pausetime, postMeansPT)
+
+predots <- append(preMeansAT, preMeansPT)
+postdots <- append(postMeansAT, postMeansPT)
+
+
+all.data = data.frame(rbind())
+temp = a9austin1025pre$output[a9austin1025pre$type == "keyboard"]
+a = table(temp)
+a[["BACK"]]
